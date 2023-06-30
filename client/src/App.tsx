@@ -4,35 +4,30 @@ import React, {
 } from 'react';
 import './App.css';
 import axios from "axios";
+import PokemonColection from './components/PokemonColection';
+import { Pokemon } from './interface';
 
 interface Pokemons {
   name: string;
   url: string;
 }
 
-interface Pokemon {
-  id: number;
-  name: string;
-  sprites: {
-    front_default: string;
-  };
-}
-
 const App:React.FC = () => {
 const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
 useEffect(() => {
-  const getPokemon = async() => {
+  const getPokemon = async () => {
     const res = await axios.get(
       "https://pokeapi.co/api/v2/pokemon?limit=20&offset=20"
     );
-    res.data.results.forEach(async (pokemon:Pokemons) => {
+    console.log(res.data);
+    res.data.results.forEach(async (pokemon: Pokemons) => {
       const poke = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
       );
       setPokemons((p) => [...p, poke.data]);
     });
-  }
+  };
   getPokemon();
 }, []);
 
@@ -42,6 +37,7 @@ useEffect(() => {
         <header className="pokemon-header">
           Pokemon
         </header>
+        <PokemonColection pokemons={pokemons}/>
       </div>
     </div>
   );
