@@ -64,11 +64,14 @@ const App:React.FC = () => {
           setViewDetail={setViewDetail}
         />
         
-        <div className="btn">
-          <button onClick={nextPage}> 
-            {loading ? "Loading..." : "Load More"} 
-          </button>
-        </div>
+        {!viewDetail.isOpened && (
+          <div className="btn">
+            <button onClick={nextPage}> 
+              {loading ? "Loading..." : "Load More"} 
+            </button>
+          </div>
+        )}
+        
       </div>
     </div>
   );

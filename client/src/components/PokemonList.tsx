@@ -33,7 +33,7 @@ const PokemonList:React.FC<IProps> = (props) => {
 
   useEffect(() => {
     setSelected(id === viewDetail?.id);
-  }, [viewDetail]);
+  }, [id, viewDetail]);
 
   const closeDetail = () => {
     setViewDetail({
